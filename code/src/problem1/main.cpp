@@ -52,6 +52,14 @@ struct Person
         out << "Name: " << std::setw(11) << name << ",  ";
         out << "Age: " << std::setw(2) << age;
     }
+    
+    virtual void capitalize()
+    {
+        for (char& c: name)
+        {
+
+        }
+    }
 };
 
 
@@ -69,6 +77,7 @@ struct Passenger : public Person
     
     void print(std::ostream& out) const
     {
+        Person::print(out);
         out << "Name: " << std::setw(11) << name << ",  ";
         out << "Age: " << std::setw(2) << age << ",  ";
         out << "Ticket: " << std::setw(6) << ticket << ",  ";
@@ -89,6 +98,7 @@ struct Citizen : public Person
     
     void print(std::ostream& out) const
     {
+        // Person::print(out);
         out << "Name: " << std::setw(11) << name << ",  ";
         out << "Age: " << std::setw(2) << age << ",  ";
         out << "City: " << std::setw(9) << city;
@@ -99,6 +109,14 @@ std::ostream& operator<<(std::ostream& out, const Person& p)
 {
     p.print(out);
     return out;
+}
+
+
+void capitalize(Person* p)
+{
+
+
+    p->capitalize();
 }
 
 int main()
@@ -113,7 +131,8 @@ int main()
         std::cout << "2. Add passenger\n";
         std::cout << "3. Add citizen\n";
         std::cout << "4. Delete all\n";
-        std::cout << "5. Quit\n";
+        std::cout << "5. Capitalize\n";
+        std::cout << "6. Quit\n";
         
         int n;
         std::cin >> n;
@@ -138,6 +157,12 @@ int main()
             v.clear();
         }
         else if (n == 5) {
+            for (Person* a: v)
+            {
+                capitalize(a);
+            }
+        }
+        else if (n == 6) {
             break;
         }
         for (const Person* a: v)
